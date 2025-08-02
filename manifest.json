@@ -3,13 +3,22 @@
   "short_name": "Diversey Tools",
   "start_url": "./index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#00d084",
+  "description": "A curated set of Diversey field and sales productivity tools.",
   "icons": [
     {
       "src": "diversey-logo.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "diversey-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ]
+  ],
+  "lang": "en-GB",
+  "dir": "ltr"
 }

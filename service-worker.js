@@ -1,22 +1,35 @@
 
-const cacheName = 'diversey-tool-hub-v1';
+const cacheName = 'diversey-tool-hub-1754156669';
 const filesToCache = [
   './',
   './index.html',
   './app.js',
   './tools.json',
+  './manifest.json',
   './diversey-logo.png',
-  './manifest.json'
+  './favicon.ico'
 ];
 
-self.addEventListener('install', e => {
-  e.waitUntil(
+self.addEventListener('install', event => {
+  event.waitUntil(
     caches.open(cacheName).then(cache => cache.addAll(filesToCache))
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(response => response || fetch(e.request))
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.map(key => {
+        if (key !== cacheName) return caches.delete(key);
+      }))
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });

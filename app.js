@@ -1,8 +1,8 @@
+const container = document.getElementById('tool-container');
 
 fetch('tools.json')
   .then(res => res.json())
   .then(data => {
-    const container = document.getElementById('tool-container');
     data.forEach(tool => {
       const card = document.createElement('a');
       card.href = tool.url;
@@ -14,4 +14,8 @@ fetch('tools.json')
       `;
       container.appendChild(card);
     });
+  })
+  .catch(err => {
+    console.error('Failed to load tools', err);
+    container.innerHTML = '<p class="text-red-600">Failed to load tools.</p>';
   });
